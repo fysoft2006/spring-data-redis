@@ -2557,4 +2557,58 @@ public class SrpConnection extends AbstractRedisConnection {
 	public Set<byte[]> zRangeByLex(byte[] key, Range range, Limit limit) {
 		throw new UnsupportedOperationException("ZRANGEBYLEX is no supported for srp.");
 	}
+
+	@Override
+	public Set<Tuple> zRangeByScoreWithScores(byte[] key, Range range, Limit limit) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<byte[]> zRevRangeByScore(byte[] key, Range range) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<byte[]> zRevRangeByScore(byte[] key, Range range, Limit limit) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<Tuple> zRevRangeByScoreWithScores(byte[] key, Range range, Limit limit) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Long zCount(byte[] key, Range range) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Long zRemRangeByScore(byte[] key, Range range) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<byte[]> zRangeByScore(byte[] key, Range range) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<byte[]> zRangeByScore(byte[] key, Range range, Limit limit) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<Tuple> zRangeByScoreWithScores(byte[] key, Range range) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

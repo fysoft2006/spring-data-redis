@@ -151,6 +151,15 @@ abstract public class JedisConverters extends Converters {
 		return String.valueOf(source).getBytes();
 	}
 
+	/**
+	 * @param source
+	 * @return
+	 * @since 1.6
+	 */
+	public static byte[] toBytes(Double source) {
+		return toBytes(String.valueOf(source));
+	}
+
 	public static byte[] toBytes(String source) {
 		return STRING_TO_BYTES.convert(source);
 	}
@@ -253,6 +262,24 @@ abstract public class JedisConverters extends Converters {
 	}
 
 	/**
+	 * Converts a given {@link Boundary} to its binary representation suitable for {@literal ZRANGEBY*} commands, despite
+	 * {@literal ZRANGEBYLEX}.
+	 * 
+	 * @param boundary
+	 * @param defaultValue
+	 * @return
+	 * @since 1.6
+	 */
+	public static byte[] boundaryToBytesForZRange(Boundary boundary, byte[] defaultValue) {
+
+		if (boundary == null || boundary.getValue() == null) {
+			return defaultValue;
+		}
+
+		return boundaryToBytes(boundary, new byte[] {}, toBytes("("));
+	}
+
+	/**
 	 * Converts a given {@link Boundary} to its binary representation suitable for ZRANGEBYLEX command.
 	 * 
 	 * @param boundary
@@ -265,10 +292,17 @@ abstract public class JedisConverters extends Converters {
 			return defaultValue;
 		}
 
-		byte[] prefix = boundary.isIncluding() ? toBytes("[") : toBytes("(");
+		return boundaryToBytes(boundary, toBytes("["), toBytes("("));
+	}
+
+	private static byte[] boundaryToBytes(Boundary boundary, byte[] inclPrefix, byte[] exclPrefix) {
+
+		byte[] prefix = boundary.isIncluding() ? inclPrefix : exclPrefix;
 		byte[] value = null;
 		if (boundary.getValue() instanceof byte[]) {
 			value = (byte[]) boundary.getValue();
+		} else if (boundary.getValue() instanceof Double) {
+			value = toBytes((Double) boundary.getValue());
 		} else if (boundary.getValue() instanceof Long) {
 			value = toBytes((Long) boundary.getValue());
 		} else if (boundary.getValue() instanceof Integer) {
@@ -283,5 +317,6 @@ abstract public class JedisConverters extends Converters {
 		buffer.put(prefix);
 		buffer.put(value);
 		return buffer.array();
+
 	}
 }
