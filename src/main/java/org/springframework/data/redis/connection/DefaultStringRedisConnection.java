@@ -1168,6 +1168,20 @@ public class DefaultStringRedisConnection implements StringRedisConnection {
 
 	/*
 	 * (non-Javadoc)
+	 * @see org.springframework.data.redis.connection.RedisZSetCommands#zRevRangeByScoreWithScores(byte[], org.springframework.data.redis.connection.RedisZSetCommands.Range)
+	 */
+	@Override
+	public Set<Tuple> zRevRangeByScoreWithScores(byte[] key, Range range) {
+
+		Set<Tuple> results = delegate.zRevRangeByScoreWithScores(key, range);
+		if (isFutureConversion()) {
+			addResultConverter(identityConverter);
+		}
+		return results;
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see org.springframework.data.redis.connection.RedisZSetCommands#zRevRangeByScoreWithScores(byte[], org.springframework.data.redis.connection.RedisZSetCommands.Range, org.springframework.data.redis.connection.RedisZSetCommands.Limit)
 	 */
 	@Override

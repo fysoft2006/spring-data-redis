@@ -885,5 +885,11 @@ public class RedisConnectionUnitTests {
 			// TODO Auto-generated method stub
 			return null;
 		}
+
+		@Override
+		public Set<Tuple> zRevRangeByScoreWithScores(byte[] key, Range range) {
+			// TODO Auto-generated method stub
+			return null;
+		}
 	}
 }

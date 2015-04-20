@@ -476,6 +476,17 @@ public interface RedisZSetCommands {
 	Set<Tuple> zRevRangeByScoreWithScores(byte[] key, double min, double max, long offset, long count);
 
 	/**
+	 * Get set of {@link Tuple} where score is between {@code Range#min} and {@code Range#max} from sorted set ordered
+	 * from high to low.
+	 * 
+	 * @param key
+	 * @param range
+	 * @return
+	 * @since 1.6
+	 */
+	Set<Tuple> zRevRangeByScoreWithScores(byte[] key, Range range);
+
+	/**
 	 * Get set of {@link Tuple} in range from {@code Limit#offset} to {@code Limit#count} where score is between
 	 * {@code Range#min} and {@code Range#max} from sorted set ordered high -> low.
 	 * 

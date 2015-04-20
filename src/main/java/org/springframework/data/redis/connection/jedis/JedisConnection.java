@@ -2454,6 +2454,15 @@ public class JedisConnection extends AbstractRedisConnection {
 
 	/*
 	 * (non-Javadoc)
+	 * @see org.springframework.data.redis.connection.RedisZSetCommands#zRevRangeByScoreWithScores(byte[], org.springframework.data.redis.connection.RedisZSetCommands.Range)
+	 */
+	@Override
+	public Set<Tuple> zRevRangeByScoreWithScores(byte[] key, Range range) {
+		return zRevRangeByScoreWithScores(key, range, null);
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see org.springframework.data.redis.connection.RedisZSetCommands#zRevRangeByScoreWithScores(byte[], org.springframework.data.redis.connection.RedisZSetCommands.Range, org.springframework.data.redis.connection.RedisZSetCommands.Limit)
 	 */
 	@Override
@@ -3508,4 +3517,5 @@ public class JedisConnection extends AbstractRedisConnection {
 			throw convertJedisAccessException(ex);
 		}
 	}
+
 }
